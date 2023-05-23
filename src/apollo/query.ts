@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const inputValue = 'qwe';
+const inputValue = 'MadKnight';
 
 const GET_REPOS = gql`
   query {
