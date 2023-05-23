@@ -1,16 +1,8 @@
 import { gql } from '@apollo/client';
 
-const inputValue = 'MadKnight';
-
 const GET_REPOS = gql`
-  query {
-    search(
-      type: REPOSITORY
-      query: """
-      ${inputValue} in:name
-      """
-      first: 10
-    ) {
+  query ($inputValue: String!) {
+    search(type: REPOSITORY, query: $inputValue, first: 10) {
       repos: edges {
         repo: node {
           ... on Repository {
@@ -33,6 +25,16 @@ const GET_REPOS = gql`
               }
             }
           }
+        }
+      }
+    }
+    viewer {
+      login
+      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 10) {
+        totalCount
+        nodes {
+          name
+          url
         }
       }
     }

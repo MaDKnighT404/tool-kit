@@ -1,3 +1,3 @@
-import Result from './Result';
+import ResultRepos from './Result';
 
-export default Result;
+export default ResultRepos;
