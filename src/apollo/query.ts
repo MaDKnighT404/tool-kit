@@ -1,9 +1,40 @@
 import { gql } from '@apollo/client';
 
+const inputValue = 'qwe';
+
 const GET_REPOS = gql`
   query {
-    viewer {
-      login
+    search(
+      type: REPOSITORY
+      query: """
+      ${inputValue} in:name
+      """
+      first: 10
+    ) {
+      repos: edges {
+        repo: node {
+          ... on Repository {
+            name
+            url
+            stargazerCount
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history(first: 1) {
+                    edges {
+                      node {
+                        ... on Commit {
+                          committedDate
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
