@@ -3,7 +3,9 @@ import styles from './Header.module.scss';
 const Header = () => {
   return (
     <div className={styles.header}>
-      <h1>Repo finder</h1>
+      <div className="header__content">
+        <h1 className={styles.header__title}>Repo Finder</h1>
+      </div>
     </div>
   );
 };

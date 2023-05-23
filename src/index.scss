@@ -21,4 +21,22 @@ html {
 
 #root {
   text-align: center;
+  min-width: 320px;
+}
+
+.header__content,
+.footer__content,
+.main__content {
+  width: 1280px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__content {
+  width: initial;
+  max-width: 1280px;
+  align-items: normal;
+  margin: 0 auto;
 }

@@ -3,7 +3,6 @@ import Layout from './components/Layout';
 import MainPage from './pages/MainPage';
 import RepoPage from './pages/RepoPage';
 import NotFoundPage from './pages/NotFoundPage';
-import './App.scss';
 
 const App = () => {
   return (

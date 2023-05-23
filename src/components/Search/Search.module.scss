@@ -1,0 +1,19 @@
+.search {
+  margin-top: 15px;
+  &__label {
+
+  }
+
+  &__text {
+    color: red;
+  }
+
+  &__icon {
+    transform: translate(130%, 25%);
+  }
+
+  &__input {
+    margin: 4rem 0;
+    text-indent: 25px;
+  }
+}
