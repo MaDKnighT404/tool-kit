@@ -27,7 +27,7 @@ interface UserRepos {
 // }
 
 export const useSearch = create<SearchValue>((set) => ({
-  inputValue: '',
+  inputValue: localStorage.getItem('inputValue') || '',
   onChange: (value: string) => set({ inputValue: value }),
   loading: false,
   error: null,
