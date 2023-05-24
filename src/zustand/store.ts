@@ -36,6 +36,11 @@ interface PaginationValues {
   setPageNumbers: (value: number[]) => void;
 }
 
+interface RepoCardValues {
+  repoCard: Repo;
+  setRepoCard: (repo: Repo) => void;
+}
+
 export const useSearch = create<SearchValue>((set) => ({
   inputValue: localStorage.getItem('inputValue') || '',
   onChange: (value: string) => set({ inputValue: value }),
@@ -70,6 +75,16 @@ export const usePagination = create<PaginationValues>((set) => ({
   setActivePage: (value) => set({ activePage: value }),
   setPages: (value) => set({ pages: value }),
   setPageNumbers: (value) => set({ pageNumbers: value }),
+  loading: false,
+  error: null,
+}));
+
+export const useRepoCard = create<RepoCardValues>((set) => ({
+  repoCard: {
+    name: '',
+    url: '',
+  },
+  setRepoCard: (repo) => set({ repoCard: repo }),
   loading: false,
   error: null,
 }));

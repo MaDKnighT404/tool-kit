@@ -1,29 +1,39 @@
 export interface Repos {
   repo: Repo;
-  __typename: string;
 }
 
 export interface Repo {
   name: string;
   stargazerCount?: string;
+  description?: string;
   url: string;
-  __typename?: string;
+  languages?: {
+    edges: LangEdges[];
+  };
   defaultBranchRef?: {
     target: {
       history: {
-        edges: Edges[];
-        __typename: string;
+        edges: CommitEdges[];
       };
-      __typename: string;
+      author: {
+        user: {
+          url: string;
+          avatarUrl: string;
+          name: string;
+        };
+      };
     };
-    __typename: string;
   };
 }
 
-interface Edges {
+interface CommitEdges {
   node: {
     committedDate: string;
-    __typename: string;
   };
-  __typename: string;
+}
+
+interface LangEdges {
+  node: {
+    name: string;
+  };
 }
