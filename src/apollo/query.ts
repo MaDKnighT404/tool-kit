@@ -1,10 +1,11 @@
 import { gql } from '@apollo/client';
 
 const GET_REPOS = gql`
-  query repoQueary($inputValue: String!, $after: String) {
+  query repoQueary($inputValue: String!) {
     viewer {
       login
-      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 10) {
+      id
+      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 100) {
         totalCount
         nodes {
           name
@@ -12,7 +13,7 @@ const GET_REPOS = gql`
         }
       }
     }
-    search(type: REPOSITORY, query: $inputValue, first: 2, after: $after) {
+    search(type: REPOSITORY, query: $inputValue, first: 2) {
       repos: edges {
         repo: node {
           ... on Repository {

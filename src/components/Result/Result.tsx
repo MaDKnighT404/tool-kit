@@ -2,25 +2,29 @@ import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import GET_REPOS from '../../apollo/query';
 import { Repos } from '../../Types';
-import { useUser, useSearch, useRepos } from '../../zustand/store';
+import { useUser, useSearch, useRepos, usePagination } from '../../zustand/store';
 import styles from './Result.module.scss';
 
 const Result = () => {
   const { inputValue } = useSearch();
-  const { userName, userRepos, setUserName, setUserRepos } = useUser();
+  const { userName, userRepos, setUserName, setUserRepos, changeUserActive } = useUser();
   const { repos, setRepos } = useRepos();
+  const { paginatedUserRepos } = usePagination();
 
   const { data, loading, error } = useQuery(GET_REPOS, {
-    variables: { inputValue, after: null },
+    variables: { inputValue },
   });
 
   useEffect(() => {
+    changeUserActive(false);
+
     if (data && inputValue) {
       const newReposArray = data.search.repos.map((obj: Repos) => obj.repo);
       setRepos(newReposArray);
     }
 
     if (data && !inputValue) {
+      changeUserActive(true);
       const userName = data.viewer.login;
       const newReposArray = data.viewer.repositories.nodes.map(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,7 +33,7 @@ const Result = () => {
       setUserName(userName);
       setUserRepos(newReposArray);
     }
-  }, [data, inputValue, setUserName, setRepos, setUserRepos]);
+  }, [data]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -44,7 +48,7 @@ const Result = () => {
       {!inputValue && !loading && (
         <>
           <h2 className={styles.result__title}>Hello {userName}!</h2>
-          <h3 className={styles.result__message}>This is your repositories</h3>
+          <h3 className={styles.result__message}>This is your repositories:</h3>
         </>
       )}
       <ul className={styles.result__list}>
@@ -71,7 +75,7 @@ const Result = () => {
                 </span>
               </li>
             ))
-          : userRepos.map((repo) => (
+          : paginatedUserRepos.map((repo) => (
               <li className={styles.result__item} key={repo.url}>
                 <span className={styles.result__text}>Repository: {repo.name}</span>
                 <span className={styles.result__text}>
