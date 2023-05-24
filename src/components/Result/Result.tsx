@@ -77,6 +77,21 @@ const Result = () => {
             ? paginatedRepos.map((repo) => (
                 <li className={styles.result__item} key={repo.url}>
                   <span className={styles.result__text}>Repository: {repo.name}</span>
+                  <span className={styles.result__text}>Stars: {repo.stargazerCount}</span>
+                  <span className={styles.result__text}>
+                    <a href={repo.url}>Github link</a>
+                  </span>
+                  <span className={styles.result__text}>
+                    {repo.defaultBranchRef
+                      ? `Last commit: ${new Date(
+                          repo.defaultBranchRef.target.history.edges[0].node.committedDate
+                        ).toLocaleDateString('en-GB', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                        })}`
+                      : 'No commits found'}
+                  </span>
                 </li>
               ))
             : paginatedRepos.map((repo) => (

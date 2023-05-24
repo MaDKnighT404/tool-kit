@@ -29,9 +29,9 @@ interface PaginationValues {
   pages: number;
   pageNumbers: number[];
   activePage: number;
-  paginatedRepos: UserRepos[] | Repo[];
+  paginatedRepos: Repo[];
   setActivePage: (value: number) => void;
-  setPaginatedRepos: (repos: UserRepos[] | Repo[]) => void;
+  setPaginatedRepos: (repos: Repo[]) => void;
   setPages: (value: number) => void;
   setPageNumbers: (value: number[]) => void;
 }
