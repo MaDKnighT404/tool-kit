@@ -1,8 +1,18 @@
 import { gql } from '@apollo/client';
 
 const GET_REPOS = gql`
-  query ($inputValue: String!) {
-    search(type: REPOSITORY, query: $inputValue, first: 10) {
+  query repoQueary($inputValue: String!, $after: String) {
+    viewer {
+      login
+      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 10) {
+        totalCount
+        nodes {
+          name
+          url
+        }
+      }
+    }
+    search(type: REPOSITORY, query: $inputValue, first: 2, after: $after) {
       repos: edges {
         repo: node {
           ... on Repository {
@@ -27,15 +37,10 @@ const GET_REPOS = gql`
           }
         }
       }
-    }
-    viewer {
-      login
-      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 10) {
-        totalCount
-        nodes {
-          name
-          url
-        }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
       }
     }
   }

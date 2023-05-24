@@ -8,23 +8,20 @@ interface SearchValue {
 
 interface UserValues {
   userName: string;
-  userRepos: UserRepos;
-  setUserRepos: (repos: Pick<UserRepos, 'nodes'>) => void;
+  userRepos: UserRepos[];
+  setUserRepos: (repos: UserRepos[]) => void;
   setUserName: (value: string) => void;
 }
 
 interface UserRepos {
-  totalCount?: number;
-  nodes?: {
-    name: string;
-    url: string;
-  }[];
+  name: string;
+  url: string;
 }
 
-// interface ReposValue {
-//   repos: Repo[];
-//   getRepos: () => void;
-// }
+export interface ReposValue {
+  repos: Repo[];
+  setRepos: (repos: Repo[]) => void;
+}
 
 export const useSearch = create<SearchValue>((set) => ({
   inputValue: localStorage.getItem('inputValue') || '',
@@ -36,17 +33,15 @@ export const useSearch = create<SearchValue>((set) => ({
 export const useUser = create<UserValues>((set) => ({
   userName: '',
   userRepos: [],
-  setUserRepos: (repos: Pick<UserRepos, 'nodes'>) => set({ userRepos: repos }),
+  setUserRepos: (repos) => set({ userRepos: repos }),
   setUserName: (value: string) => set({ userName: value }),
   loading: false,
   error: null,
 }));
 
-// export const useRepos = create<ReposValue>((set) => ({
-//   repos: [],
-//   getRepos: () => {
-//     return { repos2: [1, 2, 3] };
-//   },
-//   loading: false,
-//   error: null,
-// }));
+export const useRepos = create<ReposValue>((set) => ({
+  repos: [],
+  setRepos: (repos) => set({ repos: repos }),
+  loading: false,
+  error: null,
+}));

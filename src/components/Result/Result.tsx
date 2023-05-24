@@ -1,24 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import GET_REPOS from '../../apollo/query';
-import { Repos, Repo } from '../../Types';
-import { useUser, useSearch } from '../../zustand/store';
+import { Repos } from '../../Types';
+import { useUser, useSearch, useRepos } from '../../zustand/store';
 import styles from './Result.module.scss';
-
-interface UserRepos {
-  name: string;
-  url: string;
-}
 
 const Result = () => {
   const { inputValue } = useSearch();
-  const { userName, setUserName } = useUser();
-  const { data, loading, error } = useQuery(GET_REPOS, {
-    variables: { inputValue },
-  });
+  const { userName, userRepos, setUserName, setUserRepos } = useUser();
+  const { repos, setRepos } = useRepos();
 
-  const [repos, setRepos] = useState<Repo[] | null>([]);
-  const [userRepos, setUserRepos] = useState([]);
+  const { data, loading, error } = useQuery(GET_REPOS, {
+    variables: { inputValue, after: null },
+  });
 
   useEffect(() => {
     if (data && inputValue) {
@@ -35,13 +29,13 @@ const Result = () => {
       setUserName(userName);
       setUserRepos(newReposArray);
     }
-  }, [data, inputValue, setUserName]);
+  }, [data, inputValue, setUserName, setRepos, setUserRepos]);
 
-  if (loading && inputValue) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if ((error || !data) && inputValue) {
+  if (error || !data) {
     return <div>ERROR</div>;
   }
 
@@ -77,7 +71,7 @@ const Result = () => {
                 </span>
               </li>
             ))
-          : userRepos.map((repo: UserRepos) => (
+          : userRepos.map((repo) => (
               <li className={styles.result__item} key={repo.url}>
                 <span className={styles.result__text}>Repository: {repo.name}</span>
                 <span className={styles.result__text}>
