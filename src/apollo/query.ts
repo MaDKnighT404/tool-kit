@@ -13,7 +13,7 @@ const GET_REPOS = gql`
         }
       }
     }
-    search(type: REPOSITORY, query: $inputValue, first: 2) {
+    search(type: REPOSITORY, query: $inputValue, first: 100) {
       repos: edges {
         repo: node {
           ... on Repository {
@@ -37,11 +37,6 @@ const GET_REPOS = gql`
             }
           }
         }
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        endCursor
       }
     }
   }

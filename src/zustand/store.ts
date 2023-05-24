@@ -15,7 +15,7 @@ interface UserValues {
   setUserName: (value: string) => void;
 }
 
-interface UserRepos {
+export interface UserRepos {
   name: string;
   url: string;
 }
@@ -26,10 +26,14 @@ interface ReposValue {
 }
 
 interface PaginationValues {
+  pages: number;
+  pageNumbers: number[];
   activePage: number;
-  paginatedUserRepos: UserRepos[];
+  paginatedRepos: UserRepos[] | Repo[];
   setActivePage: (value: number) => void;
-  setPaginatedUserRepos: (repos: UserRepos[]) => void;
+  setPaginatedRepos: (repos: UserRepos[] | Repo[]) => void;
+  setPages: (value: number) => void;
+  setPageNumbers: (value: number[]) => void;
 }
 
 export const useSearch = create<SearchValue>((set) => ({
@@ -59,9 +63,13 @@ export const useRepos = create<ReposValue>((set) => ({
 
 export const usePagination = create<PaginationValues>((set) => ({
   activePage: Number(localStorage.getItem('pageNumber')) || 1,
-  paginatedUserRepos: [],
-  setPaginatedUserRepos: (repos) => set({ paginatedUserRepos: repos }),
+  paginatedRepos: [],
+  pages: 1,
+  pageNumbers: [],
+  setPaginatedRepos: (repos) => set({ paginatedRepos: repos }),
   setActivePage: (value) => set({ activePage: value }),
+  setPages: (value) => set({ pages: value }),
+  setPageNumbers: (value) => set({ pageNumbers: value }),
   loading: false,
   error: null,
 }));

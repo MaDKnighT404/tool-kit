@@ -2,4 +2,9 @@
   min-height: 90vh;
   background-color: #b9b9b9;
   padding: 0 15px;
+  overflow: scroll;
+
+    &::-webkit-scrollbar {
+    display: none;
+  }
 }

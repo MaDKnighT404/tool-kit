@@ -1,27 +1,50 @@
 import { useEffect } from 'react';
 import styles from './Pagination.module.scss';
-import { usePagination, useUser } from '../../zustand/store';
+import { UserRepos, usePagination, useRepos, useUser } from '../../zustand/store';
+import { calcPagination } from '../../helpers';
+import { Repo } from '../../Types';
 
 const Pagination = () => {
-  const { activePage, setActivePage, setPaginatedUserRepos } = usePagination();
+  const { activePage, setActivePage, setPaginatedRepos, setPages, setPageNumbers, pageNumbers } =
+    usePagination();
+
   const { userActive, userRepos } = useUser();
+  const { repos } = useRepos();
+
+  const updatePagination = (array: Repo[] | UserRepos[], pageNumber: number) => {
+    const { pages, pageNumbers } = calcPagination(array);
+    setPages(pages);
+    setPageNumbers(pageNumbers);
+    setPaginatedRepos(array.slice((pageNumber - 1) * 10, pageNumber * 10));
+  };
 
   useEffect(() => {
-    if (localStorage.getItem('pageNumber')) {
+    if (!userActive && localStorage.getItem('pageNumber')) {
       const pageNumber = Number(localStorage.getItem('pageNumber'));
-      setPaginatedUserRepos(userRepos.slice((pageNumber - 1) * 10, pageNumber * 10));
+      setPaginatedRepos(repos.slice((pageNumber - 1) * 10, pageNumber * 10));
     } else {
-      setPaginatedUserRepos(userRepos.slice(0, 10));
+      setPaginatedRepos(repos.slice(0, 10));
     }
-  }, [userRepos, setPaginatedUserRepos]);
+  }, [userActive, repos, setPaginatedRepos]);
 
-  const pages = Math.trunc(userRepos.length / 10) + 1;
-  const pageNumbers = Array.from({ length: pages }, (_, index) => index + 1);
+  useEffect(() => {
+    if (userActive && localStorage.getItem('pageNumber')) {
+      const pageNumber = Number(localStorage.getItem('pageNumber'));
+      setPaginatedRepos(userRepos.slice((pageNumber - 1) * 10, pageNumber * 10));
+    } else {
+      setPaginatedRepos(userRepos.slice(0, 10));
+    }
+  }, [userActive, userRepos, setPaginatedRepos]);
 
   const handlePageClick = (pageNumber: number) => {
     localStorage.setItem('pageNumber', String(pageNumber));
     setActivePage(pageNumber);
-    setPaginatedUserRepos(userRepos.slice((pageNumber - 1) * 10, pageNumber * 10));
+
+    if (userActive) {
+      updatePagination(userRepos, pageNumber);
+    } else {
+      updatePagination(repos, pageNumber);
+    }
   };
 
   return (
