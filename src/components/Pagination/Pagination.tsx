@@ -11,7 +11,7 @@ const Pagination = () => {
   const { userActive, userRepos } = useUser();
   const { repos } = useRepos();
 
-  const updatePagination = (array: Repo[] | UserRepos[], pageNumber: number) => {
+  const updatePagination = (array: Repo[], pageNumber: number) => {
     const { pages, pageNumbers } = calcPagination(array);
     setPages(pages);
     setPageNumbers(pageNumbers);

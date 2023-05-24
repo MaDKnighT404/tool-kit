@@ -5,10 +5,10 @@ export interface Repos {
 
 export interface Repo {
   name: string;
-  stargazerCount: string;
+  stargazerCount?: string;
   url: string;
-  __typename: string;
-  defaultBranchRef: {
+  __typename?: string;
+  defaultBranchRef?: {
     target: {
       history: {
         edges: Edges[];

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import GET_REPOS from '../../apollo/query';
@@ -76,29 +77,35 @@ const Result = () => {
           {inputValue
             ? paginatedRepos.map((repo) => (
                 <li className={styles.result__item} key={repo.url}>
-                  <span className={styles.result__text}>Repository: {repo.name}</span>
-                  <span className={styles.result__text}>Stars: {repo.stargazerCount}</span>
-                  <span className={styles.result__text}>
-                    <a href={repo.url}>Github link</a>
-                  </span>
-                  <span className={styles.result__text}>
-                    {repo.defaultBranchRef
-                      ? `Last commit: ${new Date(
-                          repo.defaultBranchRef.target.history.edges[0].node.committedDate
-                        ).toLocaleDateString('en-GB', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        })}`
-                      : 'No commits found'}
-                  </span>
+                  <Link to="/repo" className={styles.result__link}>
+                    <span className={styles.result__text}>Repository: {repo.name}</span>
+                    <span className={styles.result__text}>Stars: {repo.stargazerCount}</span>
+                    <span className={styles.result__text}>
+                      <a href={repo.url} className={styles.result__gitlink}>
+                        Github link
+                      </a>
+                    </span>
+                    <span className={styles.result__text}>
+                      {repo.defaultBranchRef
+                        ? `Last commit: ${new Date(
+                            repo.defaultBranchRef.target.history.edges[0].node.committedDate
+                          ).toLocaleDateString('en-GB', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                          })}`
+                        : 'No commits found'}
+                    </span>
+                  </Link>
                 </li>
               ))
             : paginatedRepos.map((repo) => (
                 <li className={styles.result__item} key={repo.url}>
                   <span className={styles.result__text}>Repository: {repo.name}</span>
                   <span className={styles.result__text}>
-                    <a href={repo.url}>Github link</a>
+                    <a href={repo.url} className={styles.result__link}>
+                      Github link
+                    </a>
                   </span>
                   <span className={styles.result__text}></span>
                 </li>

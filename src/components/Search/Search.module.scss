@@ -6,10 +6,12 @@
   }
 
   &__icon {
-    transform: translate(130%, 25%);
+    transform: translate(130%, 15%);
   }
 
   &__input {
+    width: 250px;
+    height: 30px;
     text-indent: 25px;
   }
 }
