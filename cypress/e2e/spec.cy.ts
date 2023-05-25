@@ -104,10 +104,8 @@ describe('Input search work correctly ', () => {
     cy.get('[class*="result__text"]').eq(0).click();
 
     cy.url().should('eq', 'http://localhost:5173/repo_card');
-
   });
 });
-
 
 describe('Repository card render correctly', () => {
   beforeEach(() => {
@@ -131,6 +129,4 @@ describe('Repository card render correctly', () => {
     cy.get('[class*="description__commit"]').should('be.visible');
     cy.get('[class*="language"]').should('be.visible');
   });
-
-
 });

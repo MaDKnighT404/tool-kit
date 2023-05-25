@@ -14,7 +14,7 @@ const Result = () => {
   const { repos, setRepos } = useRepos();
   const { paginatedRepos, setPageNumbers, setActivePage } = usePagination();
   const { setRepoCard, setIsOpenRepoCard } = useRepoCard();
-
+  
   const { data, loading, error } = useQuery(GET_REPOS, {
     variables: { inputValue },
   });
@@ -61,7 +61,7 @@ const Result = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.loader} />;
   }
 
   if (error || !data) {
@@ -72,8 +72,12 @@ const Result = () => {
     <div className={styles.result}>
       {!inputValue && !loading && (
         <>
-          <h2 className={styles.result__title} data-cy="resultTitle">Hello {userName}!</h2>
-          <h3 className={styles.result__message} data-cy="resultMessage">This is your repositories:</h3>
+          <h2 className={styles.result__title} data-cy="resultTitle">
+            Hello {userName}!
+          </h2>
+          <h3 className={styles.result__message} data-cy="resultMessage">
+            This is your repositories:
+          </h3>
         </>
       )}
       <>

@@ -6,14 +6,16 @@ import styles from './Search.module.scss';
 
 const SearchInput = () => {
   const { onChange } = useSearch();
-  const {  setIsOpenRepoCard } = useRepoCard();
+  const { setIsOpenRepoCard } = useRepoCard();
+  
   const value = localStorage.getItem('inputValue') || '';
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.setItem('inputValue', e.target.value);
     onChange(e.target.value);
     if (!value) {
       setIsOpenRepoCard(false);
-      }
+    }
   };
 
   return (
