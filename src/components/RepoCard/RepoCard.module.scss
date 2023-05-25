@@ -7,6 +7,7 @@
   grid-template-columns: 300px 1fr 1fr;
   margin-top: 50px;
   gap: 50px;
+  animation: appear 0.7s;
 
   @media (max-width: 640px) {
     grid-template-areas:
@@ -135,4 +136,17 @@
       border-radius: 15px;
     }
   }
+}
+
+@keyframes appear {
+
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
 }
