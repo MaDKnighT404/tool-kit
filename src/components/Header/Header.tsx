@@ -13,14 +13,16 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className="header__content">
-        <h1 className={styles.header__title}>Repo Finder</h1>
-        {!isOpen && (
-          <Link to="/" className={styles.header__link}>
-            <button className={styles.header__btn} onClick={handlerToggleIsOpenRepoCard}>
-              Back to Main
-            </button>
-          </Link>
-        )}
+        <div className={styles.header__wrapper}>
+          <h1 className={styles.header__title}>Repo Finder</h1>
+          {!isOpen && (
+            <Link to="/" className={styles.header__link}>
+              <button className={styles.header__btn} onClick={handlerToggleIsOpenRepoCard}>
+                Back to Main
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -18,29 +18,36 @@ const RepoCard = () => {
         year: 'numeric',
       })
     : null;
-      console.log(repoCard)
+  console.log(repoCard);
   return (
-    <div className={styles.repoCard}>
-      {/* 
-      <span>Description: {repoCard.description}</span>
-      <span>stars: {repoCard.stargazerCount}</span>
-      <span>commit: {lastCommit}</span>
+    <div className={styles.card}>
+      <h2 className={styles.card__title}>Repository: {repoCard.name}</h2>
 
-      <ul>
-        {repoLanguages?.map((lang) => (
-          <li>{lang}</li>
-        ))}
-      </ul> */}
-      <h2 className={styles.repoCard__title}>Repository: {repoCard.name}</h2>
-      <Link className={styles.repoCard__link} to={userUrl}>
-        <img
-          className={styles.repoCard__img}
-          src={avatar || '/src/assets/noAvatar.webp'}
-          alt="avatar image"
-          width={200}
-        />
-        <span className={styles['repoCard__user-name']}>{userName ? userName : 'noName'}</span>
-      </Link>
+      <div className={styles.profile}>
+        <Link className={styles.profile__link} to={userUrl}>
+          <img
+            className={styles.profile__img}
+            src={avatar || '/src/assets/noAvatar.webp'}
+            alt="avatar image"
+          />
+          <span className={styles.profile__name}>{userName ? userName : 'noName'}</span>
+        </Link>
+      </div>
+
+      <div className={styles.description}>
+      <h2 className={styles.description__title}>Description:</h2>
+        <p className={styles.description__text}>{repoCard.description || 'No descrition found'}</p>
+        <span className={styles.description__commit}>Last commit: {lastCommit}</span>
+      </div>
+
+      <div className={styles.language}>
+        <h2 className={styles.language__title}>Main languages:</h2>
+        <ul className={styles.language__list}>
+          {repoLanguages?.map((lang) => (
+            <li className={styles.language__item}>{lang}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -23,7 +23,6 @@ html {
 .header__content,
 .footer__content,
 .main__content {
-  position: relative;
   width: 1280px;
   height: 100%;
   display: flex;
@@ -38,4 +37,12 @@ html {
   margin: 0 auto;
   flex-direction: column;
   justify-content: initial;
+}
+
+.header__content {
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    padding: 0 15px;
+  }
+
 }

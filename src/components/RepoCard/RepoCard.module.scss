@@ -1,29 +1,105 @@
-.repoCard {
+.card {
   display: grid;
   grid-template-areas:
     'title title title'
-    'link . .';
+    'profile descr descr'
+    'profile lang lang';
+  grid-template-columns: 300px 1fr 1fr;
   margin-top: 50px;
-  gap:50px;
+  gap: 50px;
+
+  @media (max-width: 640px) {
+    grid-template-areas:
+    'title'
+    'profile'
+    'descr'
+    'lang';
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
 
   &__title {
     grid-area: title;
     font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: bold;
+
+    @media (max-width: 640px) {
+
+    }
   }
 
-  &__link {
-    grid-area: link;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
+  .profile {
+    grid-area: profile;
+
+    &__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    &__img {
+      border-radius: 50%;
+      width: 200px;
+
+      @media (max-width: 640px) {
+        width: 100px;
+      }
+    }
+
+    &__name {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      align-self: center;
+    }
   }
 
-  &__img {
+  .description {
+    grid-area: descr;
+    text-align: left;
+    
+    @media (max-width: 640px) {
+      text-align: center;
+    }
 
+    &__title {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: bold;
+    }
+
+    &__text {
+      font-size: 1.2rem;
+      margin: 1.2rem 0;
+    }
+
+    &__commit {
+      grid-area: commit;
+    }
   }
 
-  &__user-name {
-    align-self: center;
+  .language {
+    grid-area: lang;
+    text-align: left;
+
+    @media (max-width: 640px) {
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: bold;
+    }
+
+    &__list {
+      display: flex;
+      gap: 15px;
+      @media (max-width: 640px) {
+        justify-content: center;
+      }
+      
+    }
   }
 }
