@@ -26,6 +26,10 @@
     flex-direction: column;
     animation: appear 0.7s ;
     border: 1px solid black;
+    border-radius: 5px;
+    background: #dedddd;
+
+    box-shadow: 4px 3px 7px 0px rgba(0,0,0,0.75);
     padding: 20px;
     cursor: pointer;
   }
