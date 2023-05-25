@@ -3,11 +3,11 @@ import styles from './Main.module.scss';
 
 const Main = () => {
   return (
-    <div className={styles.main}>
+    <main className={styles.main}>
       <div className="main__content">
         <Outlet />
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -48,13 +48,14 @@ const Pagination = () => {
   };
 
   return (
-    <ul className={styles.pagination}>
-      {pageNumbers.map((pageNumber) => (
+    <ul className={styles.pagination} data-cy="pagination">
+      {pageNumbers.map((pageNumber, i) => (
         <li
           className={`${styles.pagination__item} ${
             pageNumber === activePage ? styles.pagination__item_active : ''
           }`}
           key={pageNumber}
+          data-cy={`paginationItem${i}`}
           onClick={() => handlePageClick(pageNumber)}
         >
           {pageNumber}

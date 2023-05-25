@@ -72,8 +72,8 @@ const Result = () => {
     <div className={styles.result}>
       {!inputValue && !loading && (
         <>
-          <h2 className={styles.result__title}>Hello {userName}!</h2>
-          <h3 className={styles.result__message}>This is your repositories:</h3>
+          <h2 className={styles.result__title} data-cy="resultTitle">Hello {userName}!</h2>
+          <h3 className={styles.result__message} data-cy="resultMessage">This is your repositories:</h3>
         </>
       )}
       <>
