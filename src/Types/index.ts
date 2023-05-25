@@ -19,7 +19,7 @@ export interface Repo {
         user: {
           url: string;
           avatarUrl: string;
-          name: string;
+          login: string;
         };
       };
     };

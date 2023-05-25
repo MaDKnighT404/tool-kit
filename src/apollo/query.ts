@@ -37,7 +37,7 @@ query repoQueary($inputValue: String!) {
                   user {
                     url
                     avatarUrl
-                    name
+                    login
                   }
                 }
               }

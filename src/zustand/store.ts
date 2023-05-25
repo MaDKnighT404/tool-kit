@@ -83,10 +83,7 @@ export const usePagination = create<PaginationValues>((set) => ({
 
 export const useRepoCard = create<RepoCardValues>((set) => ({
   isOpen: false,
-  repoCard: {
-    name: '',
-    url: '',
-  },
+  repoCard: JSON.parse(localStorage.getItem('repoCard') as string),
   setRepoCard: (repo) => set({ repoCard: repo }),
   toogleIsOpenRepoCard: () => set((state) => ({ isOpen: !state.isOpen })),
   loading: false,
