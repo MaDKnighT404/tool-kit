@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import GET_REPOS from '../../apollo/query';
 import Pagination from '../Pagination';
 import { useUser, useSearch, useRepos, usePagination, useRepoCard } from '../../zustand/store';
-import { calcPagination } from '../../helpers';
+import { calcPagination, formatDate } from '../../helpers';
 import { Repos, Repo } from '../../Types';
 import styles from './Result.module.scss';
 
@@ -102,13 +102,9 @@ const Result = () => {
                   </span>
                   <span className={styles.result__text}>
                     {repo.defaultBranchRef
-                      ? `Last commit: ${new Date(
+                      ? `Last commit: ${formatDate(
                           repo.defaultBranchRef.target.history.edges[0].node.committedDate
-                        ).toLocaleDateString('en-GB', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        })}`
+                        )}`
                       : 'No commits found'}
                   </span>
                 </li>

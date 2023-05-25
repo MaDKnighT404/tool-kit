@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useRepoCard } from '../../zustand/store';
 import styles from './RepoCard.module.scss';
+import { formatDate } from '../../helpers';
 
 const RepoCard = () => {
   const { isOpen, repoCard } = useRepoCard();
@@ -13,13 +14,7 @@ const RepoCard = () => {
   const repourl = repoCard.url;
   const repoLanguages = repoCard.languages?.edges.map((item) => item.node.name);
   const lastCommit = repoCard.defaultBranchRef
-    ? new Date(
-        repoCard.defaultBranchRef.target.history.edges[0].node.committedDate
-      ).toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      })
+    ? formatDate(repoCard.defaultBranchRef.target.history.edges[0].node.committedDate)
     : null;
 
   return (
