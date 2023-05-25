@@ -5,4 +5,35 @@
   height: 5vh;
   min-height: 50px;
   background-color: #e7e7e7;
+
+
+  &__link {
+    position: absolute;
+    right: 25%;
+  }
+
+  &__btn {
+    background-color: rgb(236, 220, 116);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    animation: button 0.5s;
+    transition: 0.2s ease-in;
+
+    &:hover {
+      background-color: rgb(225, 201, 46);
+      
+    }
+
+  }
+}
+
+@keyframes button {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

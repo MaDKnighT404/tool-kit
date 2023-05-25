@@ -37,8 +37,10 @@ interface PaginationValues {
 }
 
 interface RepoCardValues {
+  isOpen: boolean;
   repoCard: Repo;
   setRepoCard: (repo: Repo) => void;
+  toogleIsOpenRepoCard: () => void;
 }
 
 export const useSearch = create<SearchValue>((set) => ({
@@ -80,11 +82,13 @@ export const usePagination = create<PaginationValues>((set) => ({
 }));
 
 export const useRepoCard = create<RepoCardValues>((set) => ({
+  isOpen: false,
   repoCard: {
     name: '',
     url: '',
   },
   setRepoCard: (repo) => set({ repoCard: repo }),
+  toogleIsOpenRepoCard: () => set((state) => ({ isOpen: !state.isOpen })),
   loading: false,
   error: null,
 }));

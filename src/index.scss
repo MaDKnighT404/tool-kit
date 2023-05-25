@@ -23,6 +23,7 @@ html {
 .header__content,
 .footer__content,
 .main__content {
+  position: relative;
   width: 1280px;
   height: 100%;
   display: flex;
