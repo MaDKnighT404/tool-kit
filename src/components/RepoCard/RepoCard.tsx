@@ -1,5 +1,3 @@
-import { HiOutlineStar } from 'react-icons/hi';
-
 import { Link } from 'react-router-dom';
 import { useRepoCard } from '../../zustand/store';
 import styles from './RepoCard.module.scss';

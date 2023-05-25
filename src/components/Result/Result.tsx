@@ -14,7 +14,7 @@ const Result = () => {
   const { repos, setRepos } = useRepos();
   const { paginatedRepos, setPageNumbers, setActivePage } = usePagination();
   const { setRepoCard, setIsOpenRepoCard } = useRepoCard();
-  
+
   const { data, loading, error } = useQuery(GET_REPOS, {
     variables: { inputValue },
   });

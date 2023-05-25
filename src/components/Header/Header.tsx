@@ -9,7 +9,6 @@ const Header = () => {
   const handlerSetIsOpenRepoCard = () => {
     setIsOpenRepoCard(false);
     localStorage.setItem('isOpen', JSON.stringify(false));
-
   };
 
   return (
