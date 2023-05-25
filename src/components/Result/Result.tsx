@@ -111,13 +111,9 @@ const Result = () => {
               ))
             : paginatedRepos.map((repo) => (
                 <li className={styles.result__item} key={repo.url}>
-                  <span className={styles.result__text}>Repository: {repo.name}</span>
-                  <span className={styles.result__text}>
-                    <a href={repo.url} className={styles.result__link}>
-                      Github link
-                    </a>
-                  </span>
-                  <span className={styles.result__text}></span>
+                  <a href={repo.url} className={styles.result__link}>
+                    <span className={styles.result__text}>{repo.name}</span>
+                  </a>
                 </li>
               ))}
         </ul>

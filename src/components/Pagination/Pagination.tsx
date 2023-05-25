@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styles from './Pagination.module.scss';
-import { UserRepos, usePagination, useRepos, useUser } from '../../zustand/store';
+import { usePagination, useRepos, useUser } from '../../zustand/store';
 import { calcPagination } from '../../helpers';
 import { Repo } from '../../Types';
 

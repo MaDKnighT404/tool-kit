@@ -8,6 +8,8 @@ const Header = () => {
 
   const handlerSetIsOpenRepoCard = () => {
     setIsOpenRepoCard(false);
+    localStorage.setItem('isOpen', JSON.stringify(false));
+
   };
 
   return (
@@ -15,7 +17,7 @@ const Header = () => {
       <div className="header__content">
         <div className={styles.header__wrapper}>
           <h1 className={styles.header__title}>Repo Finder</h1>
-          {isOpen && (
+          {Boolean(isOpen) && (
             <Link to="/" className={styles.header__link}>
               <button className={styles.header__btn} onClick={handlerSetIsOpenRepoCard}>
                 Back to Main

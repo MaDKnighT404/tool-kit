@@ -5,12 +5,14 @@ import { useRepoCard } from '../../zustand/store';
 import styles from './RepoCard.module.scss';
 
 const RepoCard = () => {
-  const { repoCard } = useRepoCard();
+  const { isOpen, repoCard } = useRepoCard();
   localStorage.setItem('repoCard', JSON.stringify(repoCard));
+  localStorage.setItem('isOpen', JSON.stringify(isOpen));
 
   const avatar = repoCard.owner.avatarUrl || '/src/assets/noAvatar.webp';
   const userName = repoCard.owner.login;
   const userUrl = repoCard.owner.url;
+  const repourl = repoCard.url;
   const repoLanguages = repoCard.languages?.edges.map((item) => item.node.name);
   const lastCommit = repoCard.defaultBranchRef
     ? new Date(
@@ -21,11 +23,13 @@ const RepoCard = () => {
         year: 'numeric',
       })
     : null;
-  console.log(repoCard);
+
   return (
     <div className={styles.card}>
       <h2 className={styles.card__title}>
-        Repository: {repoCard.name}{' '}
+        <Link className={styles.card__link} to={repourl}>
+          Repository: {repoCard.name}{' '}
+        </Link>
         <span className={styles.card__stars}>{repoCard.stargazerCount}</span>
       </h2>
 
@@ -45,7 +49,9 @@ const RepoCard = () => {
       <div className={styles.language}>
         <h2 className={styles.language__title}>Main languages:</h2>
         <ul className={styles.language__list}>
-          {repoLanguages?.length === 0 ? <li className={styles.language__item}>No languages found</li> : null}
+          {repoLanguages?.length === 0 ? (
+            <li className={styles.language__item}>No languages found</li>
+          ) : null}
           {repoLanguages?.map((lang) => (
             <li className={styles.language__item} key={lang}>
               {lang}

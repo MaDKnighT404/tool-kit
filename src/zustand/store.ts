@@ -9,15 +9,10 @@ interface SearchValue {
 interface UserValues {
   userActive: boolean;
   userName: string;
-  userRepos: UserRepos[];
+  userRepos: Repo[];
   changeUserActive: (value: boolean) => void;
-  setUserRepos: (repos: UserRepos[]) => void;
+  setUserRepos: (repos: Repo[]) => void;
   setUserName: (value: string) => void;
-}
-
-export interface UserRepos {
-  name: string;
-  url: string;
 }
 
 interface ReposValue {
@@ -82,7 +77,7 @@ export const usePagination = create<PaginationValues>((set) => ({
 }));
 
 export const useRepoCard = create<RepoCardValues>((set) => ({
-  isOpen: false,
+  isOpen: Boolean(JSON.parse(localStorage.getItem('isOpen') as string)),
   repoCard: JSON.parse(localStorage.getItem('repoCard') as string),
   setRepoCard: (repo) => set({ repoCard: repo }),
   setIsOpenRepoCard: (value) => set({ isOpen: value }),
