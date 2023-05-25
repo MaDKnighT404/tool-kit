@@ -44,10 +44,10 @@
     display: flex;
     text-decoration: none;
     flex-direction: column;
-    transition: 0.2s ease-in;
+    transition: 0.15s ease-in;
 
     &:hover {
-      transform: scale(1.2) translateX(10px);
+      transform: scale(1.1) translateX(10px);
     }
   }
 
