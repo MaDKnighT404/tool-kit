@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useRepoCard, useSearch } from '../../zustand/store';
 
@@ -7,22 +7,32 @@ import styles from './Search.module.scss';
 const SearchInput = () => {
   const { onChange } = useSearch();
   const { setIsOpenRepoCard } = useRepoCard();
-  
+
   const value = localStorage.getItem('inputValue') || '';
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    localStorage.setItem('inputValue', e.target.value);
-    onChange(e.target.value);
-    if (!value) {
-      setIsOpenRepoCard(false);
+    if (timer) {
+      clearTimeout(timer);
     }
+
+    const inputValue = e.target.value;
+    localStorage.setItem('inputValue', inputValue);
+
+    const newTimer = setTimeout(() => {
+      onChange(inputValue);
+      if (!inputValue) {
+        setIsOpenRepoCard(false);
+      }
+    }, 500);
+
+    setTimer(newTimer);
   };
 
   return (
     <div className={styles.search}>
       <label className={styles.search__label}>
-        {/* <span className={styles.search__text}> Search: </span> */}
-        <BsSearch className={styles.search__icon}></BsSearch>
+        <BsSearch className={styles.search__icon} />
         <input
           onChange={handleInputChange}
           className={styles.search__input}
