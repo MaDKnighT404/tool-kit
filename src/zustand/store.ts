@@ -40,7 +40,7 @@ interface RepoCardValues {
   isOpen: boolean;
   repoCard: Repo;
   setRepoCard: (repo: Repo) => void;
-  toogleIsOpenRepoCard: () => void;
+  setIsOpenRepoCard: (value: boolean) => void;
 }
 
 export const useSearch = create<SearchValue>((set) => ({
@@ -85,7 +85,7 @@ export const useRepoCard = create<RepoCardValues>((set) => ({
   isOpen: false,
   repoCard: JSON.parse(localStorage.getItem('repoCard') as string),
   setRepoCard: (repo) => set({ repoCard: repo }),
-  toogleIsOpenRepoCard: () => set((state) => ({ isOpen: !state.isOpen })),
+  setIsOpenRepoCard: (value) => set({ isOpen: value }),
   loading: false,
   error: null,
 }));

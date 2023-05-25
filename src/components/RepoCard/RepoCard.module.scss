@@ -70,6 +70,7 @@
       font-size: 1.5rem;
       margin-top: 20px;
       align-self: center;
+      color: rgb(3, 16, 133);
     }
   }
 
@@ -114,10 +115,16 @@
     &__list {
       display: flex;
       gap: 15px;
+
       @media (max-width: 640px) {
         justify-content: center;
       }
-      
+    }
+
+    &__item {
+      background-color: antiquewhite;
+      padding: 10px 15px;
+      border-radius: 15px;
     }
   }
 }

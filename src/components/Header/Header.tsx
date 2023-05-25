@@ -4,10 +4,10 @@ import styles from './Header.module.scss';
 import { useRepoCard } from '../../zustand/store';
 
 const Header = () => {
-  const { isOpen, toogleIsOpenRepoCard } = useRepoCard();
+  const { isOpen, setIsOpenRepoCard } = useRepoCard();
 
-  const handlerToggleIsOpenRepoCard = () => {
-    toogleIsOpenRepoCard();
+  const handlerSetIsOpenRepoCard = () => {
+    setIsOpenRepoCard(false);
   };
 
   return (
@@ -15,9 +15,9 @@ const Header = () => {
       <div className="header__content">
         <div className={styles.header__wrapper}>
           <h1 className={styles.header__title}>Repo Finder</h1>
-          {!isOpen && (
+          {isOpen && (
             <Link to="/" className={styles.header__link}>
-              <button className={styles.header__btn} onClick={handlerToggleIsOpenRepoCard}>
+              <button className={styles.header__btn} onClick={handlerSetIsOpenRepoCard}>
                 Back to Main
               </button>
             </Link>

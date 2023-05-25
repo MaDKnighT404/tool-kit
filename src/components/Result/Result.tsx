@@ -13,7 +13,7 @@ const Result = () => {
   const { userName, setUserName, setUserRepos, changeUserActive } = useUser();
   const { repos, setRepos } = useRepos();
   const { paginatedRepos, setPageNumbers, setActivePage } = usePagination();
-  const { isOpen, setRepoCard, toogleIsOpenRepoCard } = useRepoCard();
+  const { setRepoCard, setIsOpenRepoCard } = useRepoCard();
 
   const { data, loading, error } = useQuery(GET_REPOS, {
     variables: { inputValue },
@@ -57,7 +57,7 @@ const Result = () => {
 
   const handlerLinkClick = (repo: Repo) => {
     setRepoCard(repo);
-    toogleIsOpenRepoCard();
+    setIsOpenRepoCard(true);
   };
 
   if (loading) {

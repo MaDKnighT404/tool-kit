@@ -8,9 +8,9 @@ const RepoCard = () => {
   const { repoCard } = useRepoCard();
   localStorage.setItem('repoCard', JSON.stringify(repoCard));
 
-  const avatar = repoCard.defaultBranchRef?.target.author.user?.avatarUrl as string;
-  const userName = repoCard.defaultBranchRef?.target.author.user?.login;
-  const userUrl = repoCard.defaultBranchRef?.target.author.user?.url as string;
+  const avatar = repoCard.owner.avatarUrl || '/src/assets/noAvatar.webp';
+  const userName = repoCard.owner.login;
+  const userUrl = repoCard.owner.url;
   const repoLanguages = repoCard.languages?.edges.map((item) => item.node.name);
   const lastCommit = repoCard.defaultBranchRef
     ? new Date(
@@ -21,7 +21,7 @@ const RepoCard = () => {
         year: 'numeric',
       })
     : null;
-
+  console.log(repoCard);
   return (
     <div className={styles.card}>
       <h2 className={styles.card__title}>
@@ -31,11 +31,7 @@ const RepoCard = () => {
 
       <div className={styles.profile}>
         <Link className={styles.profile__link} to={userUrl}>
-          <img
-            className={styles.profile__img}
-            src={avatar || '/src/assets/noAvatar.webp'}
-            alt="avatar image"
-          />
+          <img className={styles.profile__img} src={avatar} alt="avatar image" />
           <span className={styles.profile__name}>{userName ? userName : 'noName'}</span>
         </Link>
       </div>
@@ -49,8 +45,11 @@ const RepoCard = () => {
       <div className={styles.language}>
         <h2 className={styles.language__title}>Main languages:</h2>
         <ul className={styles.language__list}>
+          {repoLanguages?.length === 0 ? <li className={styles.language__item}>No languages found</li> : null}
           {repoLanguages?.map((lang) => (
-            <li className={styles.language__item}>{lang}</li>
+            <li className={styles.language__item} key={lang}>
+              {lang}
+            </li>
           ))}
         </ul>
       </div>

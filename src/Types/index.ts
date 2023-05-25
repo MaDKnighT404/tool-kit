@@ -15,14 +15,12 @@ export interface Repo {
       history: {
         edges: CommitEdges[];
       };
-      author: {
-        user: {
-          url: string;
-          avatarUrl: string;
-          login: string;
-        };
-      };
     };
+  };
+  owner: {
+    url: string;
+    avatarUrl: string;
+    login: string;
   };
 }
 
