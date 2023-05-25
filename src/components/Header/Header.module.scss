@@ -14,13 +14,17 @@
     position: absolute;
     top: 0;
     right: -150px;
+
+    @media (max-width: 600px) {
+      right: -120px;
+    }
   }
 
   &__btn {
     background-color: rgb(236, 220, 116);
     border: none;
     border-radius: 5px;
-    padding: 5px 15px;
+    padding: 5px 10px;
     cursor: pointer;
     animation: button 0.5s;
     transition: 0.2s ease-in;
