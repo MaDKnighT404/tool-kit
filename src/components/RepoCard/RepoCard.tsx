@@ -1,3 +1,5 @@
+import { HiOutlineStar } from 'react-icons/hi';
+
 import { Link } from 'react-router-dom';
 import { useRepoCard } from '../../zustand/store';
 import styles from './RepoCard.module.scss';
@@ -5,6 +7,7 @@ import styles from './RepoCard.module.scss';
 const RepoCard = () => {
   const { repoCard } = useRepoCard();
   localStorage.setItem('repoCard', JSON.stringify(repoCard));
+
   const avatar = repoCard.defaultBranchRef?.target.author.user?.avatarUrl as string;
   const userName = repoCard.defaultBranchRef?.target.author.user?.login;
   const userUrl = repoCard.defaultBranchRef?.target.author.user?.url as string;
@@ -18,10 +21,13 @@ const RepoCard = () => {
         year: 'numeric',
       })
     : null;
-  console.log(repoCard);
+
   return (
     <div className={styles.card}>
-      <h2 className={styles.card__title}>Repository: {repoCard.name}</h2>
+      <h2 className={styles.card__title}>
+        Repository: {repoCard.name}{' '}
+        <span className={styles.card__stars}>{repoCard.stargazerCount}</span>
+      </h2>
 
       <div className={styles.profile}>
         <Link className={styles.profile__link} to={userUrl}>
@@ -35,7 +41,7 @@ const RepoCard = () => {
       </div>
 
       <div className={styles.description}>
-      <h2 className={styles.description__title}>Description:</h2>
+        <h2 className={styles.description__title}>Description:</h2>
         <p className={styles.description__text}>{repoCard.description || 'No descrition found'}</p>
         <span className={styles.description__commit}>Last commit: {lastCommit}</span>
       </div>
