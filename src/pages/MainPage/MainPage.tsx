@@ -1,11 +1,14 @@
 import Search from '../../components/Search';
-import Result from '../../components/Result';
+import ResultRepos from '../../components/ResultRepos';
+import ResultUser from '../../components/ResultUser';
+import { useSearch } from '../../zustand/store';
 
 const MainPage = () => {
+  const { inputValue } = useSearch();
   return (
     <>
       <Search />
-      <Result />
+      {inputValue ? <ResultRepos /> : <ResultUser />}
     </>
   );
 };

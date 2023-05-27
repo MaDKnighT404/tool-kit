@@ -1,18 +1,7 @@
 import { gql } from '@apollo/client';
 
-const GET_REPOS = gql`
+export const GET_REPOS = gql`
   query repoQueary($inputValue: String!) {
-    viewer {
-      login
-      id
-      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 100) {
-        totalCount
-        nodes {
-          name
-          url
-        }
-      }
-    }
     search(type: REPOSITORY, query: $inputValue, first: 100) {
       repos: edges {
         repo: node {
@@ -55,4 +44,18 @@ const GET_REPOS = gql`
   }
 `;
 
-export default GET_REPOS;
+export const GET_USER = gql`
+  query {
+    viewer {
+      login
+      id
+      repositories(orderBy: { field: CREATED_AT, direction: ASC }, first: 100) {
+        totalCount
+        nodes {
+          name
+          url
+        }
+      }
+    }
+  }
+`;
