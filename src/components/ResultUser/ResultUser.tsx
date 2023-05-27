@@ -43,8 +43,8 @@ const ResultUser = () => {
 
   return (
     <>
-      {/* {paginatedRepos?.length === 0 ? <h3>Nothing found!</h3> : ''} */}
-      {!loading && (
+      {paginatedRepos?.length === 0 ? <h3>No repositories found!</h3> : ''}
+      {paginatedRepos && !loading && (
         <div className="result">
           <h2 className={styles.result__title} data-cy="resultTitle">
             Hello {userName}!

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import styles from './Pagination.module.scss';
 import { usePagination, useRepos, useUser } from '../../zustand/store';
 import { calcPagination } from '../../helpers';
 import { Repo } from '../../Types';
+import styles from './Pagination.module.scss';
 
 const Pagination = () => {
-  const { activePage, setActivePage, setPaginatedRepos, setPages, setPageNumbers, pageNumbers } =
+  const { activePage, pageNumbers, setActivePage, setPaginatedRepos, setPages, setPageNumbers } =
     usePagination();
 
   const { userActive, userRepos } = useUser();
