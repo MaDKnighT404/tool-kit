@@ -38,7 +38,7 @@ const ResultUser = () => {
   }
 
   if (error || !data) {
-    return <div>ERROR</div>;
+    return <div>ERROR! Do you added your Personal Access Token to .env file?</div>;
   }
 
   return (
