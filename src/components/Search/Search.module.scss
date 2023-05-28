@@ -9,8 +9,13 @@
     transform: translate(130%, 15%);
   }
 
+  &__label {
+    position: relative;
+    left: -8px;
+  }
+
   &__input {
-    width: 280px;
+    width: 250px;
     height: 30px;
     text-indent: 25px;
   }
