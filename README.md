@@ -1,1 +1,1 @@
-Deploy: graphqlexample.netlify.app
+Deploy: https://graphqlexample.netlify.app/
